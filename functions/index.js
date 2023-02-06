@@ -25,11 +25,26 @@ exports.data = functions.https.onRequest(async (request, response) => {
   const records = await getRecords();
   const recordsJson = records
     .map((record) => {
+      let data = record._rawJson;
+      if (data.fields["Konum"] && data.fields["Konum"].includes(",")) {
+        data.fields["Lat"] = parseFloat(
+          data.fields["Konum"].split(",")[0].trim()
+        );
+        data.fields["Long"] = parseFloat(
+          data.fields["Konum"].split(",")[1].trim()
+        );
+      }
       return {
-        ...record._rawJson,
+        ...data,
       };
     })
-    .filter((record) => Object.keys(record.fields).includes("Konum"));
+    .filter((record) => {
+      const fields = Object.keys(record.fields);
+      if (fields.includes("Konum") && record.fields["Konum"].includes(",")) {
+        return true;
+      }
+      return false;
+    });
 
   response.send({
     version: "0.1.0",
