@@ -1,0 +1,425 @@
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Black.woff2") format("woff2"),
+    url("/font/RFlex-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-BoldItalic.woff2") format("woff2"),
+    url("/font/RFlex-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-BlackItalic.woff2") format("woff2"),
+    url("/font/RFlex-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Light.woff2") format("woff2"),
+    url("/font/RFlex-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Bold.woff2") format("woff2"),
+    url("/font/RFlex-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Medium.woff2") format("woff2"),
+    url("/font/RFlex-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-ThinItalic.woff2") format("woff2"),
+    url("/font/RFlex-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-RegularItalic.woff2") format("woff2"),
+    url("/font/RFlex-RegularItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-MediumItalic.woff2") format("woff2"),
+    url("/font/RFlex-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-LightItalic.woff2") format("woff2"),
+    url("/font/RFlex-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Thin.woff2") format("woff2"),
+    url("/font/RFlex-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlexRegular.woff2") format("woff2"),
+    url("/font/RFlexRegular.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-BoldItalic.woff2") format("woff2"),
+    url("/font/RFlex-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Black.woff2") format("woff2"),
+    url("/font/RFlex-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-BlackItalic.woff2") format("woff2"),
+    url("/font/RFlex-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Bold.woff2") format("woff2"),
+    url("/font/RFlex-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-LightItalic.woff2") format("woff2"),
+    url("/font/RFlex-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlexRegular.woff2") format("woff2"),
+    url("/font/RFlexRegular.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-MediumItalic.woff2") format("woff2"),
+    url("/font/RFlex-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Medium.woff2") format("woff2"),
+    url("/font/RFlex-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Thin.woff2") format("woff2"),
+    url("/font/RFlex-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-Light.woff2") format("woff2"),
+    url("/font/RFlex-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-RegularItalic.woff2") format("woff2"),
+    url("/font/RFlex-RegularItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "R-Flex";
+  src: url("/font/RFlex-ThinItalic.woff2") format("woff2"),
+    url("/font/RFlex-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --border-radius: 0.5rem;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+::selection {
+  color: black;
+  background: white;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "R-Flex", sans-serif;
+  background: #000;
+  color: #f3ebe4;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #f3ebe4;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul span, ul a {
+  text-align: left !important;
+  font-size: 16px
+}
+
+h1 {
+  font-weight: 900;
+}
+
+h2 {
+  margin: 0 0 1rem 0;
+  font-weight: 800;
+}
+p {
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+
+.depremharitasi {
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  width: 60vw;
+  max-width: 60vw;
+}
+
+.depremharitasi > main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+@media (max-width: 768px) {
+  .depremharitasi > main {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* media queries for .menu */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+  }
+}
+.menu ul {
+  text-align: center;
+}
+.download {
+  border: none;
+  background: white;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+.download img {
+  width: 100%;
+}
+
+figcaption {
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+  margin: 2rem auto;
+  /* add animation */
+  animation: fadein 1s;
+}
+
+figcaption:hover {
+  scale: 1.02;
+}
+
+figcaption img {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+}
+
+.user_link {
+  color: #f3ebe4;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  padding: 14px;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  grid-gap: 1rem;
+  align-items: center;
+  background-color: #34373b;
+}
+
+.user_link .remove {
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.user_link a {
+  cursor: ne-resize;
+  text-decoration: none;
+  text-align: left;
+}
+
+.button {
+  width: 100%;
+  height: 3rem;
+  font-size: 1.2rem;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  background-color: #f38173;
+  color: #f3ebe4;
+}
+.button:hover {
+  background-color: #d16f63;
+}
+
+form {
+  opacity: 0.6;
+}
+
+form:hover {
+  opacity: 1;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  background: #f3ebe4;
+  border: none;
+  outline: none;
+  padding: 14px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
+  color: #000;
+}
+
+hr {
+  /* dashed border */
+  border: 0;
+  height: 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+}
+
+footer {
+  color: white;
+  position: fixed;
+  height: 50px;
+  bottom: 1rem;
+  right: 1rem;
+  width: 100px;
+  text-align: right;
+  opacity: 0.6;
+}
+footer:hover {
+  opacity: 1;
+}
+footer a {
+  font-size: 14px;
+  margin: 0.5rem;
+}
