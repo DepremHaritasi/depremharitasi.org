@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="tr">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Deprem Haritası</title>
-
-    <style media="screen">
-      body {
-        background: black;
-        color: white;
-        font-family: Roboto, Helvetica, Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
-      a {
-        color: white;
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deprem Haritasi</title>
+    <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div id="message">
-      <h1>Deprem Haritasi</h1>
+    <div className="depremharitasi">
+      <figcaption>
+        <img
+          src="/images/depremharitasi.svg"
+          alt="depremharitasi"
+          width="120"
+        />
+      </figcaption>
 
-      <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6"
-        >Airtable Görünüm</a
-      >
-      <br />
-
-      <a href="https://depremharitasi.org/data.json">Girilen Veriler (JSON)</a>
-      <br />
-
-      <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank"
-        >Telegram Grubu Davetiyesi</a
-      >
-      <br />
+      <div>
+        <h1>Deprem Haritası</h1>
+        <div>
+          <ul class="menu">
+            <li>
+              <a href="/index.html">Anasayfa</a>
+            </li>
+            <li>
+              <a href="/harita.html">Harita</a>
+            </li>
+            <li>
+              <a href="/data.json" target="_blank">API (JSON)</a>
+            </li>
+            <li>
+              <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6"
+                >Airtable Görünüm</a
+              >
+            </li>
+            <li>
+              <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank"
+                >Telegram</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
 
       <iframe
         width="560"

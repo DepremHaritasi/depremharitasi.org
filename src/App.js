@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { usePosition } from "./usePosition";
+import GoogleMapReact from "google-map-react";
+import mapStyles from "./mapStyles";
 
-const stateDefault = {};
+const AnyReactComponent = ({ text }) => <div className="marker">{text}</div>;
 
 const App = () => {
-  const [state, setState] = useState(stateDefault);
-
-  const { latitude, longitude, error } = usePosition();
-
-  // load data from local storage
-  useEffect(() => {
-    let stateLocal = JSON.parse(localStorage.getItem("state") || "{}");
-    if (stateLocal) {
-      setState(stateLocal);
-    }
-
-    // const newState = { ...stateLocal };
-    // setState(newState);
-    // localStorage.setItem("state", JSON.stringify(newState));
-  }, []);
+  const defaultProps = {
+    center: {
+      lat: 36.19227794422354,
+      lng: 36.15596012406974,
+    },
+    zoom: 11,
+  };
 
   return (
     <div className="depremharitasi">
@@ -30,22 +23,71 @@ const App = () => {
         />
       </figcaption>
 
-      <code>
-        latitude: {latitude}
-        <br />
-        longitude: {longitude}
-        <br />
-        error: {error}
-      </code>
+      <div>
+        <h1>Deprem Haritası</h1>
+        <div>
+          <ul class="menu">
+            <li>
+              <a href="/index.html">Anasayfa</a>
+            </li>
+            <li>
+              <a href="/harita.html">Harita</a>
+            </li>
+            <li>
+              <a href="/data.json" target="_blank">
+                API (JSON)
+              </a>
+            </li>
+            <li>
+              <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6">
+                Airtable Görünüm
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
+                Telegram
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
       <main>
-        <section>#map will be here</section>
+        <section style={{ height: "50vh", width: "100%" }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: "AIzaSyA7pB6adt-ET8e7kidoNkNhAQEerxYVg4s",
+            }}
+            defaultCenter={defaultProps.center}
+            defaultZoom={defaultProps.zoom}
+            language="tr"
+            region="tr"
+            heatmapLibrary={true}
+            options={{
+              styles: mapStyles,
+            }}
+          >
+            <AnyReactComponent
+              lat={36.19227794422354}
+              lng={36.15596012406974}
+              text="My Marker"
+            />
+            <AnyReactComponent
+              lat={36.13227794422354}
+              lng={36.13596012406974}
+              text="My Marker"
+            />
+          </GoogleMapReact>
+        </section>
       </main>
 
       <footer>
         <p>
-          <a href="https://depremharitasi.org" target="_blank">
-            depremharitasi.org
+          <a
+            href="https://github.com/depremharitasi/depremharitasi.org"
+            target="_blank"
+          >
+            github
           </a>
         </p>
       </footer>
