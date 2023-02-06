@@ -55,13 +55,10 @@ const mapStyles = [
   },
   {
     featureType: "poi",
-    elementType: "geometry",
+    elementType: "all",
     stylers: [
       {
-        color: "#0c4152",
-      },
-      {
-        lightness: 5,
+        visibility: "off",
       },
     ],
   },
@@ -107,6 +104,7 @@ const mapStyles = [
       },
     ],
   },
+
   {
     featureType: "road.local",
     elementType: "geometry",
