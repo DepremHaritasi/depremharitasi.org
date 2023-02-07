@@ -179,18 +179,18 @@ hr {
 footer {
   color: white;
   position: fixed;
-  height: 50px;
-  bottom: 1rem;
+  width: 80px;
+  top: 1rem;
   right: 1rem;
   width: 100px;
   text-align: right;
-  opacity: 0.6;
+  /* opacity: 0.6; */
 }
 footer:hover {
   opacity: 1;
 }
 footer a {
-  font-size: 14px;
+  font-size: 12px;
   margin: 0.5rem;
 }
 
