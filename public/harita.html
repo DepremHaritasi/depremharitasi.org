@@ -31,7 +31,7 @@
           fallbackToIP: true, // fallback to IP if Geolocation fails or rejected
           addressLookup: true, // requires Google API key if true
           timezone: true, // requires Google API key if true
-          // map: "map-canvas", // interactive map element id (or options object)
+          map: "map", // interactive map element id (or options object)
           staticMap: true, // get a static map image URL (boolean or options object)
         };
         geolocator.locate(options, function (err, location) {
