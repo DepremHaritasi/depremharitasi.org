@@ -37,7 +37,6 @@ exports.data = functions.https.onRequest(async (request, response) => {
           data.fields["Konum"].split(",")[1].trim()
         );
       }
-      // delete data.fields["Telefon"]
       delete data.fields["Telefon"];
       return {
         ...data,

@@ -11,7 +11,7 @@ firebaseAdmin.initializeApp({
 
 const firebaseAdminDB = firebaseAdmin.firestore();
 
-const depremyardimData = require("./outsourceData/depremyardim4.json");
+const depremyardimData = require("./outsourceData/depremyardim7.json");
 
 const mapsApiKey = "AIzaSyA7pB6adt-ET8e7kidoNkNhAQEerxYVg4s";
 
