@@ -68,9 +68,6 @@ p {
   max-width: 1300px;
 }
 
-.depremharitasi > main {
-}
-
 .menu {
   max-width: 600px;
   margin: 1rem auto;
@@ -99,6 +96,7 @@ figcaption {
   margin: 0 auto;
   text-align: center;
   margin: 0 auto;
+  display: none;
 }
 
 figcaption img {
@@ -176,23 +174,7 @@ hr {
   margin: 1rem auto;
 }
 
-footer {
-  color: white;
-  position: fixed;
-  width: 80px;
-  top: 1rem;
-  right: 1rem;
-  width: 100px;
-  text-align: right;
-  /* opacity: 0.6; */
-}
-footer:hover {
-  opacity: 1;
-}
-footer a {
-  font-size: 12px;
-  margin: 0.5rem;
-}
+
 
 .marker {
   border: 1px solid red;
