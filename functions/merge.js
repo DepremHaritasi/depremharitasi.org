@@ -3,6 +3,7 @@ const slugify = require("slugify");
 const firebaseAdmin = require("firebase-admin");
 const to = require("await-to-js").default;
 
+require("dotenv").config();
 const serviceAccount = require("./serviceAccountKey.json");
 
 firebaseAdmin.initializeApp({
@@ -11,9 +12,8 @@ firebaseAdmin.initializeApp({
 
 const firebaseAdminDB = firebaseAdmin.firestore();
 
-const depremyardimData = require("./outsourceData/depremyardim4.json");
+const mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
 
-const mapsApiKey = "AIzaSyA7pB6adt-ET8e7kidoNkNhAQEerxYVg4s";
 
 const geo = geocoder({
   key: mapsApiKey,
@@ -65,18 +65,6 @@ const dataHasBuilding = (content) => {
     content.includes("numara")
   );
 };
-
-const filtered = depremyardimData.filter((item) => {
-  const itemKey = fixTerms(Object.values(item).join(" "));
-  const hasMahalle = dataHasMahalle(itemKey);
-  const hasNumbers = dataHasNumbers(itemKey);
-  const hasBuilding = dataHasBuilding(itemKey);
-
-  if ((hasMahalle && hasNumbers) || hasBuilding) {
-    return true;
-  }
-  return false;
-});
 
 const addressSlug = (record) => {
   return slugify(
@@ -166,8 +154,6 @@ const splitIntoChunks = (arr, chunkSize) => {
   return R;
 };
 
-const chunks = splitIntoChunks(filtered, 10);
-
 const parseItem = async (item) => {
   console.log("----------------------------------");
   const itemRecord = fixTerms(Object.values(item).join(" "));
@@ -207,35 +193,78 @@ const parseItem = async (item) => {
   console.log("----------------------------------");
 };
 
-chunks.slice(0, 5).forEach(async (chunk) => {
-  await Promise.all(
-    chunk.map(async (item) => {
-      [err, response] = await to(parseItem(item));
-    })
-  );
-});
+const main = async () => {
+  // get 10 records from locations that isGoogleGeocoded is false
+  const snapshot = await firebaseAdminDB
+    .collection("location")
+    .where("isGoogleGeocoded", "==", false)
+    .limit(10)
+    .get();
 
-// filtered.slice(0, 50).forEach(async (item) => {
-//   const itemRecord = fixTerms(Object.values(item).join(" "));
+  if (snapshot.empty) {
+    console.log("No matching documents.");
+    return;
+  }
 
-//   if (itemRecord.location_type === "APPROXIMATE") return;
-//   console.log("----------------------------------");
-//   const response = await getGeoCodeResponse(itemRecord);
-//   const addressSlugified = addressSlug(response);
-//   const recordExists = await checkRecordExists(addressSlugified);
+  const records = [];
+  snapshot.forEach((doc) => {
+    records.push({ ...doc.data(), id: doc.id });
+  });
 
-//   if (!recordExists) {
-//     const recordData = JSON.parse(
-//       JSON.stringify({
-//         ...response,
-//         seedData: item,
-//         slug: addressSlugified,
-//       })
-//     );
-//     return Promise.all([sleep(2000), saveRecord(recordData), sleep(2000)]);
-//   }
+  records.forEach(async (record) => {
+    const addressMerged = fixTerms(
+      `${record.address} ${record.neighborhood} ${record.district} ${record.city}`
+    );
 
-//   console.log("----------------------------------");
-// });
+    if (record?.address_slug) {
+      record.addressSlug = record.address_slug;
+      delete record.address_slug;
+    }
 
-console.log("filtered", filtered.length);
+    //console.log(addressMerged);
+
+    const [err1, geoCodeResponse] = await to(getGeoCodeResponse(addressMerged));
+    //console.log(geoCodeResponse);
+    if (err1) {
+      console.log("************", err1);
+    }
+
+    if (!geoCodeResponse?.location?.lat) return;
+    if (!geoCodeResponse?.formatted_address) return;
+
+    if (geoCodeResponse?.postal_code?.long_name) {
+      record.postalCode = geoCodeResponse.postal_code.long_name;
+    }
+    if (geoCodeResponse?.country?.long_name) {
+      record.country =
+        `${geoCodeResponse.country.long_name}`.toLocaleLowerCase();
+    }
+    if (geoCodeResponse?.location_type) {
+      record.locationType = geoCodeResponse.location_type;
+    }
+    if (geoCodeResponse?.location_bounds) {
+      record.locationBounds = geoCodeResponse.location_bounds;
+    }
+    record.location = geoCodeResponse.location;
+    record.geoPoint = new firebaseAdmin.firestore.GeoPoint(
+      geoCodeResponse.location.lat,
+      geoCodeResponse.location.lng
+    );
+    record.formattedAddress = geoCodeResponse.formatted_address;
+    record.isGoogleGeocoded = true;
+
+    console.log(record);
+
+    try {
+      const r = await firebaseAdminDB
+        .collection("location")
+        .doc(record.id)
+        .update(record);
+      return r;
+    } catch (error) {
+      console.log("********", error);
+    }
+  });
+};
+
+main();

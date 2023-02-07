@@ -11,7 +11,7 @@ const base = new Airtable({ apiKey: token }).base(baseId);
 const table = base(tableId);
 
 // import json file
-const depremyardimData = require("./outsourceData/depremyardim3.json");
+const depremyardimData = require("./outsourceData/depremyardim7.json");
 
 const getRecords = async () => {
   const records = await table.select().all();
@@ -64,7 +64,7 @@ exports.depremyardim = functions.https.onRequest(async (request, response) => {
   }
 
   response.send({
-    version: "7SUBAT_01:20",
+    version: "7SUBAT_15:12",
     records: depremyardimData,
   });
 });

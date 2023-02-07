@@ -1,7 +1,5 @@
-const geocoder = require("google-geocoder");
 const slugify = require("slugify");
 const firebaseAdmin = require("firebase-admin");
-const to = require("await-to-js").default;
 const { sehir } = require("sehir");
 const serviceAccount = require("./serviceAccountKey.json");
 
@@ -12,12 +10,6 @@ firebaseAdmin.initializeApp({
 const firebaseAdminDB = firebaseAdmin.firestore();
 
 const depremyardimData = require("./outsourceData/depremyardim7.json");
-
-const mapsApiKey = "AIzaSyA7pB6adt-ET8e7kidoNkNhAQEerxYVg4s";
-
-const geo = geocoder({
-  key: mapsApiKey,
-});
 
 const fixTerms = (content) => {
   return content
@@ -39,7 +31,8 @@ const fixTerms = (content) => {
     .replaceAll(".:", ": ")
 
     .replaceAll(" ,", " ")
-    .replaceAll("  ", " ");
+    .replaceAll("  ", " ")
+    .trim();
 };
 
 const dataHasMahalle = (content) => {
@@ -78,14 +71,18 @@ const filtered = depremyardimData.filter((item) => {
   return false;
 });
 
-const valuesSlug = (record) => {
-  return slugify(Object.values(record).join("_"), {
+const slug = (value) => {
+  return slugify(value, {
     replacement: "_",
     remove: /[*+~.,()'"!:@\/]/g,
     lower: true,
     strict: false,
     trim: true,
   });
+};
+
+const valuesSlug = (record) => {
+  return slug(Object.values(record).join("_"));
 };
 
 const addressSlug = (record) => {
@@ -114,64 +111,6 @@ const checkRecordExists = async (slug) => {
   return true;
 };
 
-const saveRecord = async (record) => {
-  const data = {
-    slug: record.slug,
-    //seed_data: { ...record.seedData },
-    city: record.konum_il,
-    district: record.konum_ilce,
-    address: record.adres,
-    name_surname: record.isimsoyisim,
-    formatted_address: record.formatted_address,
-    lat: record.location.lat,
-    lng: record.location.lng,
-    location: new firebaseAdmin.firestore.GeoPoint(
-      record.location.lat,
-      record.location.lng
-    ),
-  };
-  if (record.street_number) {
-    data.street_number = record.street_number.short_name;
-  }
-  if (record.route) {
-    data.route = record.route;
-  }
-  if (record.postal_code) {
-    data.postal_code = record.postal_code.short_name;
-  }
-  const docRef = await firebaseAdminDB
-    .collection("location")
-    .doc(data.slug)
-    .set(data);
-
-  console.log("Document written with ID: ", docRef);
-};
-
-const getGeoCodeResponse = (address) => {
-  return new Promise((resolve, reject) => {
-    try {
-      geo.find(address, (err, res) => {
-        if (err) reject();
-        if (res.length === 0) reject();
-        const geoObject = res[0];
-        if (!geoObject) reject();
-        resolve(geoObject);
-      });
-    } catch (error) {
-      reject();
-    }
-  });
-};
-
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-const splitIntoChunks = (arr, chunkSize) => {
-  const R = [];
-  for (let i = 0, len = arr.length; i < len; i += chunkSize)
-    R.push(arr.slice(i, i + chunkSize));
-  return R;
-};
-
 const main = async () => {
   //console.log("filtered", filtered);
   filtered.forEach(async (item) => {
@@ -187,14 +126,15 @@ const main = async () => {
       nameSurname: item.isimsoyisim
         ? `${item.isimsoyisim}`.trim().toLocaleLowerCase()
         : null,
-      address: item.adres ? `${item.adres}`.trim().toLocaleLowerCase() : null,
+      address: item.adres ? fixTerms(item.adres) : null,
     };
-
+    itemNew.addressSlug = slug(itemNew.address);
     itemNew.slug = valuesSlug(itemNew);
     itemNew.version = "initial_record";
     itemNew.isGoogleGeocoded = false;
 
-    // firebase check if exists
+    if (itemNew.addressSlug.length < 4) return;
+
     const exists = await checkRecordExists(itemNew.slug);
     if (!exists) {
       const docRef = await firebaseAdminDB
@@ -204,7 +144,6 @@ const main = async () => {
 
       console.log("Document written with ID: ", docRef);
     }
-    await sleep(1000);
   });
 };
 
