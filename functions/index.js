@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const firebaseAdmin = require("firebase-admin");
+const ngeohash = require("ngeohash");
 
 require("dotenv").config();
 
@@ -41,7 +42,7 @@ exports.data = functions.https.onRequest(async (request, response) => {
         data.fields["Lat"] = parseFloat(
           data.fields["Konum"].split(",")[0].trim()
         );
-        data.fields["Long"] = parseFloat(
+        data.fields["lng"] = parseFloat(
           data.fields["Konum"].split(",")[1].trim()
         );
       }
@@ -77,42 +78,72 @@ exports.depremyardim = functions.https.onRequest(async (request, response) => {
   });
 });
 
+const getGeohashRange = (
+  latitude,
+  lngitude,
+  distance // miles
+) => {
+  const lat = 0.0144927536231884; // degrees latitude per mile
+  const lon = 0.0181818181818182; // degrees lngitude per mile
+
+  const lowerLat = latitude - lat * distance;
+  const lowerLon = lngitude - lon * distance;
+
+  const upperLat = latitude + lat * distance;
+  const upperLon = lngitude + lon * distance;
+
+  const lower = ngeohash.encode(lowerLat, lowerLon);
+  const upper = ngeohash.encode(upperLat, upperLon);
+
+  return {
+    lower,
+    upper,
+  };
+};
+
 exports.api = functions.https.onRequest(async (request, response) => {
   response.set("Access-Control-Allow-Origin", "*");
   response.set("Content-Type", "application/json");
   if (request.method !== "GET") {
     response.status(403).send("Forbidden!");
   }
-  // get querystring for lat and long
-  let { lat, long } = request.query;
-  if (!lat || !long) {
+  // get querystring for lat and lng
+  let { lat, lng } = request.query;
+  if (!lat || !lng) {
     lat = 36.2021974510878;
-    long = 36.16074412901604;
+    lng = 36.16074412901604;
   }
+
+  const range = getGeohashRange(Number(lat), Number(lng), 30);
 
   // get 10 records from firestore by distance
   const snapshot = await firebaseAdminDB
     .collection("location")
-    .orderBy("location")
-    .startAt([lat, long])
-    .limit(10)
+    //.where("locationType", "!=", "APPROXIMATE")
+    .where("hash", ">=", range.lower)
+    .where("hash", "<=", range.upper)
+    .limit(300)
     .get();
 
   const records = snapshot.docs.map((doc) => {
     const data = doc.data();
-    //delete data.id;
+    delete data.id;
     delete data.addressSlug;
     delete data.slug;
     delete data.isGoogleGeocoded;
     delete data.locationBounds;
     delete data.locationType;
+    delete data.version;
+    delete data.geoPoint;
+    delete data.location;
+    delete data.hash;
     return data;
   });
 
   response.send({
     version: "0.1.0",
     lat,
-    long,
+    lng,
     records,
   });
 });
