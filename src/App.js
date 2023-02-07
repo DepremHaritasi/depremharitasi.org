@@ -53,8 +53,8 @@ const App = () => {
       </div>
 
       <main>
-        <section style={{ height: "50vh", width: "100%" }}>
-          <GoogleMapReact
+        <section id="map" style={{ height: "50vh", width: "100%" }}>
+          {/* <GoogleMapReact
             bootstrapURLKeys={{
               key: "AIzaSyA7pB6adt-ET8e7kidoNkNhAQEerxYVg4s",
             }}
@@ -77,7 +77,7 @@ const App = () => {
               lng={36.13596012406974}
               text="My Marker"
             />
-          </GoogleMapReact>
+          </GoogleMapReact> */}
         </section>
       </main>
 
