@@ -100,12 +100,7 @@ exports.api = functions.https.onRequest(async (request, response) => {
 
   const records = snapshot.docs.map((doc) => {
     const data = doc.data();
-    return {
-      id: doc.id,
-      fields: {
-        ...data,
-      },
-    };
+    return data;
   });
 
   response.send({
