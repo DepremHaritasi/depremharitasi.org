@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deprem Haritasi</title>
     <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
     <link rel="stylesheet" href="/style.css" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxu6AHW_bKnUY4A-kB8yKcsBXAPwO4E_o"></script>
+    <script src="js/map.js" defer></script>
   </head>
   <body>
     <div className="depremharitasi">
       <figcaption>
-        <img
-          src="/images/depremharitasi.svg"
-          alt="depremharitasi"
-          width="60"
-        />
+        <img src="/images/depremharitasi.svg" alt="depremharitasi" width="30" />
       </figcaption>
 
       <div>
@@ -25,34 +23,46 @@
               <a href="/index.html">Anasayfa</a>
             </li>
             <li>
-              <a href="/harita.html">Harita</a>
+              <a href="/ekle.html">Veri Ekle</a>
             </li>
             <li>
-              <a href="/data.json" target="_blank">API (JSON) 🔗</a>
+              <a href="/data.json" target="_blank"> API (JSON) 🔗 </a>
             </li>
             <li>
               <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6">
-                Airtable Görünüm 🔗</a
-              >
+                Airtable Görünüm 🔗
+              </a>
             </li>
             <li>
-              <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank"
-                >Telegram 🔗</a
-              >
+              <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
+                Telegram 🔗
+              </a>
             </li>
           </ul>
         </div>
+
+        <select name="cities" id="cities">
+          <option value="36.98638182644116, 35.32482042610344">Adana</option>
+          <option value="36.2021974510878, 36.16074412901604" selected>
+            Hatay
+          </option>
+        </select>
       </div>
 
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/gNN2Y9vD4MM"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+      <main>
+        <section id="map" style="height: 70vh; width: 100%"></section>
+      </main>
+
+      <footer>
+        <p>
+          <a
+            href="https://github.com/depremharitasi/depremharitasi.org"
+            target="_blank"
+          >
+            github
+          </a>
+        </p>
+      </footer>
     </div>
   </body>
 </html>

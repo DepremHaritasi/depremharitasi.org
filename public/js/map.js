@@ -5,8 +5,8 @@
     circleList: [],
     infoWindow: null,
     init: () => {
-      const citiesElement = d.getElementById('cities')
-      const center = p.helpers.getCityCoords(citiesElement)
+      const citiesElement = d.getElementById("cities");
+      const center = p.helpers.getCityCoords(citiesElement);
 
       p.map = new google.maps.Map(document.getElementById("map"), {
         center,
@@ -149,17 +149,15 @@
         overlayMapTypes: [],
         mapTypeControl: false,
         streetViewControl: false,
-
       });
       p.map.addListener("dragend", p.events.center_changed);
-      citiesElement.addEventListener("change", p.events.cities_changed, false)
+      citiesElement.addEventListener("change", p.events.cities_changed, false);
       p.helpers.getData();
     },
     events: {
       cities_changed: () => {
-        const coords = p.helpers.getCityCoords(d.getElementById('cities'));
+        const coords = p.helpers.getCityCoords(d.getElementById("cities"));
         p.map.setCenter(coords);
-
       },
       center_changed: () => {
         p.helpers.getData();
@@ -184,16 +182,21 @@
     },
     helpers: {
       getCityCoords: (elem) => {
-        const [lat,lng] = elem.value.split(', ')
-        return (lat && lng) ? { lat:+lat, lng:+lng } : { lat: 36.19227794422354, lng: 36.15596012406974 }
+        const [lat, lng] = elem.value.split(", ");
+        return lat && lng
+          ? { lat: +lat, lng: +lng }
+          : { lat: 36.19227794422354, lng: 36.15596012406974 };
       },
       setInfoWindow: (data) => {
         if (p.infoWindow) p.infoWindow.setMap(null);
 
         const { fields } = data.data;
-        let fieldList = Object.keys(fields).map((i) => {
-          return `<b>${i} : </b>${fields[i]}`;
-        });
+        const excludeList = ["TweetLink", "Telefon", "Lat", "Long"];
+        let fieldList = Object.keys(fields)
+          .filter((i) => !excludeList.includes(i))
+          .map((i) => {
+            return `<b>${i} : </b>${fields[i]}`;
+          });
 
         p.infoWindow = new google.maps.InfoWindow({
           content: `<div style='color:#000;text-align:left'>
@@ -208,7 +211,7 @@
         let center = p.map.getCenter();
         center = { lat: center.lat(), lng: center.lng() };
         fetch(
-          `https://depremharitasi.org/api?lat=${center.lat}&long=${center.lng}`
+          `https://depremharitasi.org/data.json?lat=${center.lat}&long=${center.lng}`
         ).then(p.events.data_received);
       },
       setMarkers: (data) => {

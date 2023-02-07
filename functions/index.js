@@ -100,6 +100,12 @@ exports.api = functions.https.onRequest(async (request, response) => {
 
   const records = snapshot.docs.map((doc) => {
     const data = doc.data();
+    //delete data.id;
+    delete data.addressSlug;
+    delete data.slug;
+    delete data.isGoogleGeocoded;
+    delete data.locationBounds;
+    delete data.locationType;
     return data;
   });
 
