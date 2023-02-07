@@ -6,8 +6,40 @@
     <title>Deprem Haritasi</title>
     <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
     <link rel="stylesheet" href="/style.css" />
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9HGqpdcuCoenYPyUgddEDy8lSXzuphnY&libraries=places"></script>
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9HGqpdcuCoenYPyUgddEDy8lSXzuphnY&libraries=places"
+    ></script>
     <script src="js/map.js" defer></script>
+    <script type="text/javascript" src="js/geolocator.min.js"></script>
+    <script type="text/javascript">
+      geolocator.config({
+        language: "tr",
+        google: {
+          version: "3",
+          key: "AIzaSyC9HGqpdcuCoenYPyUgddEDy8lSXzuphnY",
+        },
+      });
+
+      window.onload = function () {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumWait: 10000, // max wait time for desired accuracy
+          maximumAge: 0, // disable cache
+          desiredAccuracy: 30, // meters
+          fallbackToIP: true, // fallback to IP if Geolocation fails or rejected
+          addressLookup: true, // requires Google API key if true
+          timezone: true, // requires Google API key if true
+          // map: "map-canvas", // interactive map element id (or options object)
+          staticMap: true, // get a static map image URL (boolean or options object)
+        };
+        geolocator.locate(options, function (err, location) {
+          if (err) return console.log(err);
+          console.log("location", location);
+        });
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
