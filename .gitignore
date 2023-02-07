@@ -1,4 +1,6 @@
 # Logs
+serviceAccountKey.json
+
 logs
 *.log
 npm-debug.log*

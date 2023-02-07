@@ -35,17 +35,17 @@ const App = () => {
             </li>
             <li>
               <a href="/data.json" target="_blank">
-                API (JSON)
+                API (JSON) 🔗
               </a>
             </li>
             <li>
               <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6">
-                Airtable Görünüm
+                Airtable Görünüm 🔗
               </a>
             </li>
             <li>
               <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
-                Telegram
+                Telegram 🔗
               </a>
             </li>
           </ul>

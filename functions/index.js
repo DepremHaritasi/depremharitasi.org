@@ -10,6 +10,9 @@ const token = process.env.AIRTABLE_TOKEN;
 const base = new Airtable({ apiKey: token }).base(baseId);
 const table = base(tableId);
 
+// import json file
+const depremyardimData = require("./outsourceData/depremyardim3.json");
+
 const getRecords = async () => {
   const records = await table.select().all();
   return records;
@@ -34,6 +37,8 @@ exports.data = functions.https.onRequest(async (request, response) => {
           data.fields["Konum"].split(",")[1].trim()
         );
       }
+      // delete data.fields["Telefon"]
+      delete data.fields["Telefon"];
       return {
         ...data,
       };
@@ -49,5 +54,18 @@ exports.data = functions.https.onRequest(async (request, response) => {
   response.send({
     version: "0.1.0",
     records: recordsJson,
+  });
+});
+
+exports.depremyardim = functions.https.onRequest(async (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Content-Type", "application/json");
+  if (request.method !== "GET") {
+    response.status(403).send("Forbidden!");
+  }
+
+  response.send({
+    version: "7SUBAT_01:20",
+    records: depremyardimData,
   });
 });
