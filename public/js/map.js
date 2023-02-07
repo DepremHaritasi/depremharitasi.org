@@ -5,8 +5,11 @@
     circleList: [],
     infoWindow: null,
     init: () => {
+      const citiesElement = d.getElementById('cities')
+      const center = p.helpers.getCityCoords(citiesElement)
+
       p.map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 36.19227794422354, lng: 36.15596012406974 },
+        center,
         zoom: 13,
         styles: [
           {
@@ -147,12 +150,17 @@
         mapTypeControl: false,
         streetViewControl: false,
 
-        // disableDefaultUI: true
       });
       p.map.addListener("dragend", p.events.center_changed);
+      citiesElement.addEventListener("change", p.events.cities_changed, false)
       p.helpers.getData();
     },
     events: {
+      cities_changed: () => {
+        const coords = p.helpers.getCityCoords(d.getElementById('cities'));
+        p.map.setCenter(coords);
+
+      },
       center_changed: () => {
         p.helpers.getData();
       },
@@ -175,12 +183,14 @@
       },
     },
     helpers: {
+      getCityCoords: (elem) => {
+        const [lat,lng] = elem.value.split(', ')
+        return (lat && lng) ? { lat:+lat, lng:+lng } : { lat: 36.19227794422354, lng: 36.15596012406974 }
+      },
       setInfoWindow: (data) => {
-        console.log(data);
         if (p.infoWindow) p.infoWindow.setMap(null);
 
         const { fields } = data.data;
-        console.log(fields);
         let fieldList = Object.keys(fields).map((i) => {
           return `<b>${i} : </b>${fields[i]}`;
         });
@@ -197,7 +207,6 @@
       getData: () => {
         let center = p.map.getCenter();
         center = { lat: center.lat(), lng: center.lng() };
-        console.log(center);
         fetch(
           `https://depremharitasi.org/data.json?lat=${center.lat}&long=${center.lng}`
         ).then(p.events.data_received);
