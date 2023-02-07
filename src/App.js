@@ -19,7 +19,7 @@ const App = () => {
         <img
           src="/images/depremharitasi.svg"
           alt="depremharitasi"
-          width={120}
+          width="60"
         />
       </figcaption>
 
@@ -53,7 +53,7 @@ const App = () => {
       </div>
 
       <main>
-        <section id="map" style={{ height: "50vh", width: "100%" }}>
+        <section id="map" style={{ height: "70vh", width: "100%" }}>
           {/* <GoogleMapReact
             bootstrapURLKeys={{
               key: "AIzaSyA7pB6adt-ET8e7kidoNkNhAQEerxYVg4s",

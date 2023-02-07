@@ -62,8 +62,8 @@ p {
 .depremharitasi {
   margin: 0 auto;
   padding-bottom: 2rem;
-  width: 60vw;
-  max-width: 60vw;
+  width: 95vw;
+  max-width: 1300px;
 }
 
 .depremharitasi > main {
