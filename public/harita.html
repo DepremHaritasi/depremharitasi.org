@@ -11,38 +11,61 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9HGqpdcuCoenYPyUgddEDy8lSXzuphnY&libraries=places"
     ></script>
     <script src="js/map.js" defer></script>
-    <script type="text/javascript" src="js/geolocator.min.js"></script>
-    <script type="text/javascript">
-      geolocator.config({
-        language: "tr",
-        google: {
-          version: "3",
-          key: "AIzaSyC9HGqpdcuCoenYPyUgddEDy8lSXzuphnY",
-        },
-      });
-
-      window.onload = function () {
-        var options = {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumWait: 10000, // max wait time for desired accuracy
-          maximumAge: 0, // disable cache
-          desiredAccuracy: 30, // meters
-          fallbackToIP: true, // fallback to IP if Geolocation fails or rejected
-          addressLookup: true, // requires Google API key if true
-          timezone: true, // requires Google API key if true
-          map: "map", // interactive map element id (or options object)
-          staticMap: true, // get a static map image URL (boolean or options object)
-        };
-        geolocator.locate(options, function (err, location) {
-          if (err) return console.log(err);
-          console.log("location", location);
-        });
-      };
-    </script>
   </head>
   <body>
-    <div id="root"></div>
-    <script src="main.js"></script>
+    <div className="depremharitasi">
+      <figcaption>
+        <img src="/images/depremharitasi.svg" alt="depremharitasi" width="30" />
+      </figcaption>
+
+      <div>
+        <h1>Deprem Haritası</h1>
+        <div>
+          <ul class="menu">
+            <li>
+              <a href="/index.html">Anasayfa</a>
+            </li>
+            <li>
+              <a href="/harita.html">Harita</a>
+            </li>
+            <li>
+              <a href="/data.json" target="_blank"> API (JSON) 🔗 </a>
+            </li>
+            <li>
+              <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6">
+                Airtable Görünüm 🔗
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
+                Telegram 🔗
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <select name="cities" id="cities">
+          <option value="36.98638182644116, 35.32482042610344">Adana</option>
+          <option value="36.2021974510878, 36.16074412901604" selected>
+            Hatay
+          </option>
+        </select>
+      </div>
+
+      <main>
+        <section id="map" style="height: 70vh; width: 100%"></section>
+      </main>
+
+      <footer>
+        <p>
+          <a
+            href="https://github.com/depremharitasi/depremharitasi.org"
+            target="_blank"
+          >
+            github
+          </a>
+        </p>
+      </footer>
+    </div>
   </body>
 </html>

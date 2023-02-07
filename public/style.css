@@ -86,30 +86,20 @@ p {
 .menu ul {
   text-align: center;
 }
-.download {
-  border: none;
-  background: white;
-  border-radius: 20px;
-  margin-bottom: 2rem;
-}
-.download img {
-  width: 100%;
+
+#cities{
+  margin: 2rem;
 }
 
 figcaption {
   margin: 0 auto;
   text-align: center;
   margin: 0 auto;
-  animation: fadein 1s;
-}
-
-figcaption:hover {
-  scale: 1.02;
 }
 
 figcaption img {
   width: 100%;
-  max-width: 100px;
+  max-width: 30px;
   height: auto;
 }
 
