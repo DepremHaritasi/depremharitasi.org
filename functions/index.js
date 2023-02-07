@@ -1,4 +1,5 @@
 const functions = require("firebase-functions");
+const firebaseAdmin = require("firebase-admin");
 
 require("dotenv").config();
 
@@ -9,6 +10,13 @@ const token = process.env.AIRTABLE_TOKEN;
 
 const base = new Airtable({ apiKey: token }).base(baseId);
 const table = base(tableId);
+
+const serviceAccount = require("./serviceAccountKey.json");
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(serviceAccount),
+});
+
+const firebaseAdminDB = firebaseAdmin.firestore();
 
 // import json file
 const depremyardimData = require("./outsourceData/depremyardim7.json");
@@ -66,5 +74,44 @@ exports.depremyardim = functions.https.onRequest(async (request, response) => {
   response.send({
     version: "7SUBAT_15:12",
     records: depremyardimData,
+  });
+});
+
+exports.api = functions.https.onRequest(async (request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  response.set("Content-Type", "application/json");
+  if (request.method !== "GET") {
+    response.status(403).send("Forbidden!");
+  }
+  // get querystring for lat and long
+  let { lat, long } = request.query;
+  if (!lat || !long) {
+    lat = 36.2021974510878;
+    long = 36.16074412901604;
+  }
+
+  // get 10 records from firestore by distance
+  const snapshot = await firebaseAdminDB
+    .collection("location")
+    .orderBy("location")
+    .startAt([lat, long])
+    .limit(10)
+    .get();
+
+  const records = snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      fields: {
+        ...data,
+      },
+    };
+  });
+
+  response.send({
+    version: "0.1.0",
+    lat,
+    long,
+    records,
   });
 });
