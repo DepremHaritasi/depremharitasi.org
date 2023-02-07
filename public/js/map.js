@@ -208,7 +208,7 @@
         let center = p.map.getCenter();
         center = { lat: center.lat(), lng: center.lng() };
         fetch(
-          `https://depremharitasi.org/data.json?lat=${center.lat}&long=${center.lng}`
+          `https://depremharitasi.org/api?lat=${center.lat}&long=${center.lng}`
         ).then(p.events.data_received);
       },
       setMarkers: (data) => {
