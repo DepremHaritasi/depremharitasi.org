@@ -16,6 +16,7 @@
     "airtable": "^0.11.6",
     "await-to-js": "^3.0.0",
     "axios": "^1.3.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0",
