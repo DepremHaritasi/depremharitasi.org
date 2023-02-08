@@ -4,6 +4,8 @@
     map: null,
     circleList: [],
     infoWindow: null,
+    currentRequest: false,
+    requestQueue: null,
     init: () => {
       const citiesElement = d.getElementById("cities");
       const center = p.helpers.getCityCoords(citiesElement);
@@ -164,6 +166,7 @@
         p.helpers.getData();
       },
       data_received: async (resp) => {
+        p.currentRequest = false;
         let data;
 
         for (; (data = p.circleList.pop()); ) {
@@ -172,6 +175,10 @@
 
         let result = await resp.json();
         result.records.forEach((i) => p.helpers.setMarkers(i));
+
+        if (p.requestQueue)
+          p.helpers.getData();
+
       },
       circle_click: (circlePoint) => {
         let pointData = p.circleList.find(
@@ -212,9 +219,15 @@
       getData: () => {
         let center = p.map.getCenter();
         center = { lat: center.lat(), lng: center.lng() };
+        p.requestQueue = center;
+        if (p.currentRequest) {
+          return
+        }
+        p.currentRequest = true;
         fetch(
           `https://depremharitasi.org/api?lat=${center.lat}&lng=${center.lng}`
         ).then(p.events.data_received);
+        p.requestQueue = null
       },
       setMarkers: (data) => {
         const {lat, lng} = data;
