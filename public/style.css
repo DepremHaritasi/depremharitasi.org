@@ -117,6 +117,10 @@ body:has(#map) {
   overflow: hidden;
 }
 
+main{
+  padding-top: 100px
+}
+
 footer {
   position: fixed;
   bottom: 0;
