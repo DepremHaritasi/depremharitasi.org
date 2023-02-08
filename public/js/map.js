@@ -176,14 +176,12 @@
         let result = await resp.json();
         result.records.forEach((i) => p.helpers.setMarkers(i));
 
-        if (p.requestQueue)
-          p.helpers.getData();
+        if (p.requestQueue) p.helpers.getData();
 
         new markerClusterer.MarkerClusterer({
           map: p.map,
-          markers: p.circleList.map(i => i.circle)
+          markers: p.circleList.map((i) => i.circle),
         });
-
       },
       circle_click: (circlePoint) => {
         let pointData = p.circleList.find(
@@ -203,7 +201,7 @@
       setInfoWindow: (data) => {
         if (p.infoWindow) p.infoWindow.setMap(null);
 
-        console.log("data", data)
+        console.log("data", data);
 
         const excludeList = ["postalCode", "lat", "lng", "city", "country"];
         let fieldList = Object.keys(data.data)
@@ -226,16 +224,24 @@
         center = { lat: center.lat(), lng: center.lng() };
         p.requestQueue = center;
         if (p.currentRequest) {
-          return
+          return;
         }
         p.currentRequest = true;
+
+        // add loading
+        d.getElementById("loading").classList.remove("hide");
+
         fetch(
           `https://depremharitasi.org/api?lat=${center.lat}&lng=${center.lng}`
-        ).then(p.events.data_received);
-        p.requestQueue = null
+        ).then((resp) => {
+          p.events.data_received(resp);
+          // hide loading
+          d.getElementById("loading").classList.add("hide");
+        });
+        p.requestQueue = null;
       },
       setMarkers: (data) => {
-        const {lat, lng} = data;
+        const { lat, lng } = data;
         const point = { lat, lng };
 
         const circle = new google.maps.Marker({

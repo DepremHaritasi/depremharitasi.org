@@ -117,6 +117,46 @@ body:has(#map) {
   overflow: hidden;
 }
 
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: #000;
+  opacity: 0.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 0.3s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 main {
   font-size: 1.4rem;
   /* padding-top: 100px;
@@ -145,6 +185,7 @@ footer {
   margin-bottom: 0.5rem;
   font-size: 2rem;
   padding: 0.5rem;
+  max-width: 400px;
 }
 
 .user_link {
