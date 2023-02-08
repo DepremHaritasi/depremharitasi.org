@@ -117,8 +117,12 @@ body:has(#map) {
   overflow: hidden;
 }
 
-main{
-  padding-top: 100px
+main {
+  font-size: 1.4rem;
+  padding-top: 150px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 footer {
