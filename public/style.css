@@ -74,14 +74,16 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* media queries for .menu */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .menu {
     flex-direction: column;
   }
-}
+} */
 .menu ul {
   text-align: center;
 }
@@ -91,21 +93,44 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 20vh;
+  height: 10vh;
+  min-height: 50px;
   z-index: 10;
   background-color: #000;
 }
 
+/* disable scroll if body has #map */
+body:has(#map) {
+  overflow: hidden;
+}
+
 #map {
   margin-top: 20vh;
-  height: 80vh;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 9;
+  overflow: hidden;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5vh;
+  min-height: 50px;
+  z-index: 10;
+  background-color: #000;
 }
 
 #cities {
-  margin-bottom: 1rem;
-  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
   padding: 0.5rem;
 }
 
