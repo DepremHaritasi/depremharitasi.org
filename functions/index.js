@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const firebaseAdmin = require("firebase-admin");
 const ngeohash = require("ngeohash");
+const geofire = require("geofire-common");
 
 require("dotenv").config();
 
@@ -107,43 +108,69 @@ exports.api = functions.https.onRequest(async (request, response) => {
   if (request.method !== "GET") {
     response.status(403).send("Forbidden!");
   }
-  // get querystring for lat and lng
   let { lat, lng } = request.query;
+  lat = Number(lat);
+  lng = Number(lng);
+
   if (!lat || !lng) {
     lat = 36.2021974510878;
     lng = 36.16074412901604;
   }
 
-  const range = getGeohashRange(Number(lat), Number(lng), 30);
+  const center = [lat, lng];
+  const radiusInM = 10 * 1000;
 
-  // get 10 records from firestore by distance
-  const snapshot = await firebaseAdminDB
-    .collection("location")
-    //.where("locationType", "!=", "APPROXIMATE")
-    .where("hash", ">=", range.lower)
-    .where("hash", "<=", range.upper)
-    .limit(300)
-    .get();
+  const bounds = geofire.geohashQueryBounds(center, radiusInM);
+  const promises = [];
+  for (const b of bounds) {
+    const q = firebaseAdminDB
+      .collection("location")
+      .orderBy("geohash")
+      .startAt(b[0])
+      .endAt(b[1])
+      .limit(550);
 
-  const records = snapshot.docs.map((doc) => {
-    const data = doc.data();
-    delete data.id;
-    delete data.addressSlug;
-    delete data.slug;
-    delete data.isGoogleGeocoded;
-    delete data.locationBounds;
-    delete data.locationType;
-    delete data.version;
-    delete data.geoPoint;
-    delete data.location;
-    delete data.hash;
-    return data;
+    promises.push(q.get());
+  }
+
+  const matchingDocs = await Promise.all(promises).then((snapshots) => {
+    const matchingDocs = [];
+
+    for (const snap of snapshots) {
+      for (const doc of snap.docs) {
+        const lat = doc.get("lat");
+        const lng = doc.get("lng");
+
+        const distanceInKm = geofire.distanceBetween([lat, lng], center);
+        const distanceInM = distanceInKm * 1000;
+        if (distanceInM <= radiusInM) {
+          const data = doc.data();
+          delete data.id;
+          delete data.addressSlug;
+          delete data.slug;
+          delete data.isGoogleGeocoded;
+          delete data.locationBounds;
+          delete data.locationType;
+          delete data.version;
+          delete data.geoPoint;
+          delete data.location;
+          delete data.hash;
+          delete data.geohash;
+
+          if (data.locationType !== "APPROXIMATE") {
+            matchingDocs.push(data);
+          }
+        }
+      }
+    }
+
+    return matchingDocs;
   });
 
   response.send({
-    version: "0.1.0",
+    version: "0.1.1",
     lat,
     lng,
-    records,
+    records: matchingDocs,
   });
 });
