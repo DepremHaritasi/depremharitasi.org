@@ -158,6 +158,7 @@
       cities_changed: () => {
         const coords = p.helpers.getCityCoords(d.getElementById("cities"));
         p.map.setCenter(coords);
+        p.helpers.getData();
       },
       center_changed: () => {
         p.helpers.getData();
@@ -219,7 +220,7 @@
         const {lat, lng} = data;
         const point = { lat, lng };
 
-        const circle = new google.maps.Circle({
+        const circle = new google.maps.Marker({
           clickable: true,
           strokeColor: "#F00",
           strokeOpacity: 0.8,
@@ -227,7 +228,8 @@
           fillColor: "#F00",
           fillOpacity: 0.35,
           map: p.map,
-          center: point,
+          position: point,
+          // center: point,
           radius: 100,
         });
 
