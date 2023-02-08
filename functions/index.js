@@ -121,8 +121,7 @@ exports.api = functions
     lng = Number(lng);
 
     if (!lat || !lng) {
-      lat = 36.2021974510878;
-      lng = 36.16074412901604;
+      response.send({ success: false });
     }
 
     const center = [lat, lng];
@@ -136,8 +135,7 @@ exports.api = functions
         .orderBy("geohash")
         .startAt(b[0])
         .endAt(b[1])
-        .limit(400);
-
+        .limit(800);
       promises.push(q.get());
     }
 
