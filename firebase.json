@@ -8,12 +8,12 @@
     ],
     "rewrites": [
       {
-        "source": "/data.json",
-        "function": "data"
+        "source": "/ekle",
+        "destination": "/ekle.html"
       },
       {
-        "source": "/DepremYardimCom.json",
-        "function": "depremyardim"
+        "source": "/vinc-operatorleri",
+        "destination": "/vinc-operatorleri.html"
       },
       {
         "source": "/api",
