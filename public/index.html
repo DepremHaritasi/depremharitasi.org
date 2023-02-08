@@ -5,6 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deprem Haritasi</title>
     <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
+
+    <link rel="canonical" href="https://depremharitasi.org" />
+    <meta property="og:url" content="https://depremharitasi.org" />
+
+    <meta property="og:title" content="Deprem Haritasi" />
+    <meta name="twitter:title" content="Deprem Haritasi" />
+    <meta
+      name="description"
+      content="2023 acil yardım gereken konumlar için harita"
+    />
+    <meta
+      name="twitter:description"
+      content="2023 acil yardım gereken konumlar için harita"
+    />
+    <meta
+      property="og:description"
+      content="2023 acil yardım gereken konumlar için harita"
+    />
+
+    <meta property="og:site_name" content="Deprem Haritasi" />
+    <meta name="twitter:site" content="Deprem Haritasi" />
+
+    <meta
+      name="twitter:image"
+      content="https://depremharitasi.org/images/preview.png"
+    />
+    <meta
+      property="og:image"
+      content="https://depremharitasi.org/images/preview.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:type" content="website" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="google" content="notranslate" />
+    <meta name="target" content="all" />
+    <meta name="audience" content="all" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+
+    <meta name="msapplication-TileColor" content="#000" />
+    <meta name="theme-color" content="#000000" />
+
     <link rel="stylesheet" href="/style.css" />
     <script
       type="text/javascript"
@@ -18,22 +64,26 @@
         <img src="/images/depremharitasi.svg" alt="depremharitasi" width="30" />
       </figcaption>
 
-      <div>
-        <h1>Deprem Haritası</h1>
+      <header>
         <div>
           <ul class="menu">
             <li>
-              <a href="/index.html">Anasayfa</a>
+              <a href="/"
+                ><img
+                  src="/images/depremharitasi.svg"
+                  alt="depremharitasi"
+                  width="30"
+              /></a>
             </li>
             <li>
               <a href="/ekle.html">Veri Ekle</a>
             </li>
             <li>
-              <a href="/data.json" target="_blank"> API (JSON) 🔗 </a>
-            </li>
-            <li>
-              <a target="_blank" href="https://airtable.com/shrRPT8eUwDBTR9V6">
-                Airtable Görünüm 🔗
+              <a
+                href="https://github.com/DepremHaritasi/depremharitasi.org"
+                target="_blank"
+              >
+                Github 🔗
               </a>
             </li>
             <li>
@@ -45,25 +95,27 @@
         </div>
 
         <select name="cities" id="cities">
-          <option value="36.2021974510878, 36.16074412901604" selected>
+          <option value="36.09427776920618, 35.97254440068597" selected>
             Hatay
           </option>
 
           <option value="37.73811468039885, 36.8188619961894">
             Kahramanmaraş
           </option>
-          <option value="37.06808678403081, 37.37522317987024">Gaziantep</option>
-          <option value="37.198848614381326, 38.807815215863464">Şanlıurfa</option>
-          <option value="36.98638182644116, 35.32482042610344">Adana</option>
+          <option value="37.06808678403081, 37.37522317987024">
+            Gaziantep
+          </option>
+          <option value="37.198848614381326, 38.807815215863464">
+            Şanlıurfa
+          </option>
+          <option value="36.99925726321512, 35.27530149369535">Adana</option>
           <option value="37.889532350383426, 41.129302500441284">Batman</option>
           <option value="38.88747816182707, 40.501061133033645">Bingöl</option>
           <option value="38.342701664420716, 38.44773214278779">Malatya</option>
         </select>
-      </div>
+      </header>
 
-      <main>
-        <section id="map" style="height: 70vh; width: 100%"></section>
-      </main>
+      <section id="map"></section>
     </div>
   </body>
 </html>

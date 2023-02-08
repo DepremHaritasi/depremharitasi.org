@@ -86,8 +86,24 @@ p {
   text-align: center;
 }
 
-#cities{
-  margin: 1rem;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh;
+  z-index: 10;
+}
+
+#map {
+  margin-top: 20vh;
+  height: 80vh;
+  width: 100%;
+  z-index: 9;
+}
+
+#cities {
+  margin-bottom: 1rem;
   font-size: 2.2rem;
   padding: 0.5rem;
 }
@@ -173,8 +189,6 @@ hr {
   border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
   margin: 1rem auto;
 }
-
-
 
 .marker {
   border: 1px solid red;

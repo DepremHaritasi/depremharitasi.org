@@ -190,12 +190,13 @@
       setInfoWindow: (data) => {
         if (p.infoWindow) p.infoWindow.setMap(null);
 
-        const { fields } = data.data;
-        const excludeList = ["TweetLink", "Telefon", "Lat", "Long"];
-        let fieldList = Object.keys(fields)
-          .filter((i) => !excludeList.includes(i))
+        console.log("data", data)
+
+        const excludeList = ["postalCode", "lat", "lng", "city", "country"];
+        let fieldList = Object.keys(data.data)
+          .filter((i) => data.data[i] && !excludeList.includes(i))
           .map((i) => {
-            return `<b>${i} : </b>${fields[i]}`;
+            return `<b>${i} : </b>${data.data[i]}`.toLocaleUpperCase();
           });
 
         p.infoWindow = new google.maps.InfoWindow({
@@ -211,18 +212,18 @@
         let center = p.map.getCenter();
         center = { lat: center.lat(), lng: center.lng() };
         fetch(
-          `https://depremharitasi.org/data.json?lat=${center.lat}&long=${center.lng}`
+          `https://depremharitasi.org/api?lat=${center.lat}&lng=${center.lng}`
         ).then(p.events.data_received);
       },
       setMarkers: (data) => {
-        const [latStr, lngStr] = data.fields.Konum.split(", ");
-        const point = { lat: +latStr, lng: +lngStr };
+        const {lat, lng} = data;
+        const point = { lat, lng };
 
         const circle = new google.maps.Circle({
           clickable: true,
           strokeColor: "#F00",
           strokeOpacity: 0.8,
-          strokeWeight: 2,
+          strokeWeight: 3,
           fillColor: "#F00",
           fillOpacity: 0.35,
           map: p.map,
