@@ -179,6 +179,11 @@
         if (p.requestQueue)
           p.helpers.getData();
 
+        new markerClusterer.MarkerClusterer({
+          map: p.map,
+          markers: p.circleList.map(i => i.circle)
+        });
+
       },
       circle_click: (circlePoint) => {
         let pointData = p.circleList.find(
@@ -240,7 +245,7 @@
           strokeWeight: 3,
           fillColor: "#F00",
           fillOpacity: 0.35,
-          map: p.map,
+          // map: p.map,
           position: point,
           // center: point,
           radius: 100,
