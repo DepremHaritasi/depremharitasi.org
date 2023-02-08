@@ -119,9 +119,14 @@ body:has(#map) {
 
 main {
   font-size: 1.4rem;
-  padding-top: 150px;
+  /* padding-top: 100px;
+  padding-bottom: 150px; */
+  padding: 1rem;
+  padding-bottom: 100px;
+
   max-width: 600px;
-  margin: 0 auto;
+  margin: 100px auto;
+  margin-bottom: 200px;
   text-align: left;
 }
 
@@ -140,19 +145,6 @@ footer {
   margin-bottom: 0.5rem;
   font-size: 2rem;
   padding: 0.5rem;
-}
-
-figcaption {
-  margin: 0 auto;
-  text-align: center;
-  margin: 0 auto;
-  display: none;
-}
-
-figcaption img {
-  width: 100%;
-  max-width: 30px;
-  height: auto;
 }
 
 .user_link {
@@ -193,17 +185,18 @@ figcaption img {
   background-color: #d16f63;
 }
 
-form {
-  opacity: 0.6;
+form fieldset {
+  border: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }
 
-form:hover {
-  opacity: 1;
-}
-
-input {
-  width: 100%;
-  margin-bottom: 10px;
+input,
+textarea,
+select {
+  margin: 0.5rem auto;
+  width: 90%;
   background: #f3ebe4;
   border: none;
   outline: none;

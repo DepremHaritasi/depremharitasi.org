@@ -1,94 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Önemli Telefon Numaraları</title>
+    <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Önemli Telefon Numaraları</title>
-  <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
+    <link rel="canonical" href="https://depremharitasi.org" />
+    <meta property="og:url" content="https://depremharitasi.org" />
+    <meta property="og:title" content="Deprem Haritasi" />
+    <meta
+      name="description"
+      content="2023 büyük depremi acil yardım gereken konumlar için harita"
+    />
+    <meta
+      property="og:description"
+      content="2023 büyük depremi acil yardım gereken konumlar için harita"
+    />
+    <meta property="og:site_name" content="Deprem Haritasi" />
+    <meta
+      property="og:image"
+      content="https://depremharitasi.org/images/preview.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:type" content="website" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="target" content="all" />
+    <meta name="audience" content="all" />
+    <meta name="theme-color" content="#000000" />
 
-  <link rel="canonical" href="https://depremharitasi.org" />
-  <meta property="og:url" content="https://depremharitasi.org" />
-  <meta property="og:title" content="Deprem Haritasi" />
-  <meta name="description" content="2023 büyük depremi acil yardım gereken konumlar için harita" />
-  <meta property="og:description" content="2023 büyük depremi acil yardım gereken konumlar için harita" />
-  <meta property="og:site_name" content="Deprem Haritasi" />
-  <meta property="og:image" content="https://depremharitasi.org/images/preview.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta property="og:type" content="website" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta content="yes" name="apple-touch-fullscreen" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <meta name="target" content="all" />
-  <meta name="audience" content="all" />
-  <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="/style.css" />
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxu6AHW_bKnUY4A-kB8yKcsBXAPwO4E_o"
+    ></script>
+    <script src="/js/markerClusterer.js"></script>
+    <script src="/js/map.js" defer></script>
+  </head>
 
-  <link rel="stylesheet" href="/style.css" />
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxu6AHW_bKnUY4A-kB8yKcsBXAPwO4E_o"></script>
-  <script src="/js/markerClusterer.js"></script>
-  <script src="/js/map.js" defer></script>
-</head>
+  <body>
+    <div className="depremharitasi">
+      <header>
+        <div>
+          <ul class="menu">
+            <li>
+              <a href="/"
+                ><img
+                  src="/images/depremharitasi.svg"
+                  alt="depremharitasi"
+                  width="30"
+              /></a>
+            </li>
+            <li>
+              <a href="https://depremyardim.com/" target="_blank">Veri Ekle</a>
+            </li>
+            <li>
+              <a href="/vinc-operatorleri.html">Vinç Operatörleri</a>
+            </li>
+            <li>
+              <a href="/telefon.html">Telefon Numaraları</a>
+            </li>
+          </ul>
+        </div>
+      </header>
 
-<body>
-  <div className="depremharitasi">
-    <header>
-      <div>
+      <main>
+        <h1>AFAD Numaraları</h1>
+
+        <ol>
+          <li>
+            <span>Diyarbakır:</span>
+            <a href="tel:+904123261156">0412 326 1156</a>
+          </li>
+          <li>
+            <span>Hatay:</span> <a href="tel:+903261120000">0326 112 0000</a>
+          </li>
+          <li>
+            <span>Maraş:</span> <a href="tel:+903442214991">0344 221 4991</a>
+          </li>
+          <li>
+            <span>Antep:</span> <a href="tel:+903424281118">0342 428 1118</a>
+          </li>
+          <li>
+            <span>Adana:</span> <a href="tel:+903222272854">0322 227 2854</a>
+          </li>
+          <li>
+            <span>Adıyaman:</span> <a href="tel:+904162161231">0416 216 1231</a>
+          </li>
+          <li>
+            <span>Urfa:</span> <a href="tel:+904143137290">0414 313 7290</a>
+          </li>
+          <li>
+            <span>Malatya:</span> <a href="tel:+904222128432">0422 212 8432</a>
+          </li>
+          <li>
+            <span>Mardin:</span> <a href="tel:+904822123740">0482 212 3740</a>
+          </li>
+        </ol>
+      </main>
+
+      <footer>
         <ul class="menu">
           <li>
-            <a href="/"
-              ><img
-                src="/images/depremharitasi.svg"
-                alt="depremharitasi"
-                width="30"
-            /></a>
+            <a
+              href="https://github.com/DepremHaritasi/depremharitasi.org"
+              target="_blank"
+            >
+              Github 🔗
+            </a>
           </li>
           <li>
-            <a href="/ekle.html">Veri Ekle</a>
-          </li>
-          <li>
-            <a href="/vinc-operatorleri.html">Vinç Operatörleri</a>
-          </li>
-          <li>
-            <a href="/telefon.html">Telefon Numaraları</a>
+            <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
+              Telegram 🔗
+            </a>
           </li>
         </ul>
-      </div>
-    </header>
-
-    <main>
-      <h1>AFAD Numaraları</h1>
-
-      <ol>
-        <li>Diyarbakır: 0412 326 1156</li>
-        <li> Hatay: 0326 112 0000</li>
-        <li>Maraş: 0344 221 4991</li>
-        <li>Antep: 0342 428 1118</li>
-        <li>Adana: 0322 227 2854</li>
-        <li>Adıyaman: 0416 216 1231</li>
-        <li>Urfa: 0414 313 7290</li>
-        <li>Malatya: 0422 212 8432</li>
-        <li> Mardin: 0482 212 3740</li>
-
-      </ol>
-
-    </main>
-
-    <footer>
-      <ul class="menu">
-        <li>
-          <a href="https://github.com/DepremHaritasi/depremharitasi.org" target="_blank">
-            Github 🔗
-          </a>
-        </li>
-        <li>
-          <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
-            Telegram 🔗
-          </a>
-        </li>
-      </ul>
-    </footer>
-  </div>
-</body>
-
+      </footer>
+    </div>
+  </body>
 </html>

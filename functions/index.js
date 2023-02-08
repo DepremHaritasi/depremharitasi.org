@@ -136,7 +136,7 @@ exports.api = functions
         .orderBy("geohash")
         .startAt(b[0])
         .endAt(b[1])
-        .limit(1000);
+        .limit(400);
 
       promises.push(q.get());
     }
@@ -164,6 +164,7 @@ exports.api = functions
             delete data.location;
             delete data.hash;
             delete data.geohash;
+            delete data.country;
 
             if (data.locationType !== "APPROXIMATE") {
               matchingDocs.push(data);

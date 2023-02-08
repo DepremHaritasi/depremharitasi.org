@@ -1,24 +1,47 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deprem Haritasi</title>
+    <title>Yardım Talebi Formu</title>
     <link rel="icon" type="image/png" href="./images/depremharitasi_128.png" />
+
+    <link rel="canonical" href="https://depremharitasi.org" />
+    <meta property="og:url" content="https://depremharitasi.org" />
+    <meta property="og:title" content="Deprem Haritasi" />
+    <meta
+      name="description"
+      content="2023 büyük depremi acil yardım gereken konumlar için harita"
+    />
+    <meta
+      property="og:description"
+      content="2023 büyük depremi acil yardım gereken konumlar için harita"
+    />
+    <meta property="og:site_name" content="Deprem Haritasi" />
+    <meta
+      property="og:image"
+      content="https://depremharitasi.org/images/preview.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:type" content="website" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="target" content="all" />
+    <meta name="audience" content="all" />
+    <meta name="theme-color" content="#000000" />
+
     <link rel="stylesheet" href="/style.css" />
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxu6AHW_bKnUY4A-kB8yKcsBXAPwO4E_o"
+    ></script>
+    <script src="/js/markerClusterer.js"></script>
+    <script src="/js/map.js" defer></script>
   </head>
   <body>
     <div className="depremharitasi">
-      <figcaption>
-        <img
-          src="/images/depremharitasi.svg"
-          alt="depremharitasi"
-          width="60"
-        />
-      </figcaption>
-
-      <div>
-        <h1>Deprem Haritası</h1>
+      <header>
         <div>
           <ul class="menu">
             <li>
@@ -30,7 +53,7 @@
               /></a>
             </li>
             <li>
-              <a href="/ekle.html">Veri Ekle</a>
+              <a href="https://depremyardim.com/" target="_blank">Veri Ekle</a>
             </li>
             <li>
               <a href="/vinc-operatorleri.html">Vinç Operatörleri</a>
@@ -40,21 +63,94 @@
             </li>
           </ul>
         </div>
-      </div>
+      </header>
 
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/gNN2Y9vD4MM"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+      <main>
+        <h1>Yardım Talebi Formu</h1>
 
-      <br>
+        <!-- <form action="/veri-ekle">
+          <fieldset>
+            <label for="sehir">Şehir</label>
+            <select name="cities" id="cities">
+              <option value="36.202631, 36.160468" selected>Hatay</option>
+              <option value="36.99925726321512, 35.27530149369535">
+                Adana
+              </option>
+              <option value="37.575227, 36.922881">Kahramanmaraş</option>
+              <option value="37.06808678403081, 37.37522317987024">
+                Gaziantep
+              </option>
+              <option value="37.198848614381326, 38.807815215863464">
+                Şanlıurfa
+              </option>
+              <option value="37.929176880215834, 40.22405235592333">
+                Diyarbakır
+              </option>
+              <option value="37.889532350383426, 41.129302500441284">
+                Batman
+              </option>
+              <option value="38.88747816182707, 40.501061133033645">
+                Bingöl
+              </option>
+              <option value="37.31172611670314, 40.74499744383826">
+                Mardin
+              </option>
+              <option value="38.342701664420716, 38.44773214278779">
+                Malatya
+              </option>
+            </select>
 
-      <p>Veri Eklemek İçin Telegram grubuna katılın</p>
+            <label for="ilce">İlçe</label>
+            <input type="text" name="ilce" id="ilce" />
+
+            <label for="mahalle">Mahalle</label>
+            <input type="text" name="mahalle" id="mahalle" />
+
+            <label for="location">Konum</label>
+            <input type="text" name="location" id="location" />
+
+            <label for="street">Sokak</label>
+            <input type="text" name="street" id="street" />
+
+            <label for="building">Apartman</label>
+            <input type="text" name="building" id="building" />
+
+            <label for="name">İsim</label>
+            <input type="text" name="name" id="name" />
+
+            <label for="telephone">Telefon</label>
+            <input type="text" name="telephone" id="telephone" />
+
+            <label for="description">Açıklama</label>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </fieldset>
+
+          <button type="submit" class="button">Gönder</button>
+        </form> -->
+      </main>
+
+      <footer>
+        <ul class="menu">
+          <li>
+            <a
+              href="https://github.com/DepremHaritasi/depremharitasi.org"
+              target="_blank"
+            >
+              Github 🔗
+            </a>
+          </li>
+          <li>
+            <a href="https://t.me/+50CjJep6mLViMWI0" target="_blank">
+              Telegram 🔗
+            </a>
+          </li>
+        </ul>
+      </footer>
     </div>
   </body>
 </html>
