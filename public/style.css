@@ -62,10 +62,10 @@ p {
 }
 
 .depremharitasi {
-  margin: 0 auto;
-  padding-bottom: 2rem;
-  width: 95vw;
-  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 .menu {
@@ -88,12 +88,29 @@ p {
   text-align: center;
 }
 
+header .menu li {
+  margin: 0 2rem;
+}
+
+.add-data-btn {
+  cursor: pointer;
+  border: 1px solid #34373b;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  transition: all 200ms;
+}
+
+.add-data-btn:hover {
+  background-color: #34373b3e;
+}
+
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   width: 100%;
-  height: 10vh;
   min-height: 50px;
   z-index: 10;
   background-color: #000;
@@ -105,30 +122,11 @@ body:has(#map) {
 }
 
 #map {
-  margin-top: 20vh;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9;
-  overflow: hidden;
-}
-
-main {
-  font-size: 1.4rem;
-  padding-top: 150px;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
+  height: 100%;
+  width: 100%;
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 5vh;
   min-height: 50px;
