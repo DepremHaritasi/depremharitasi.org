@@ -1,5 +1,5 @@
 const firebaseAdmin = require("firebase-admin");
-const ngeohash = require("ngeohash");
+const geofire = require("geofire-common");
 
 require("dotenv").config();
 const serviceAccount = require("./serviceAccountKey.json");
@@ -14,7 +14,7 @@ const main = async () => {
   const snapshot = await firebaseAdminDB
     .collection("location")
     .where("version", "==", "v1")
-    //.limit(1000)
+    //.limit(100)
     .get();
 
   if (snapshot.empty) {
@@ -26,16 +26,21 @@ const main = async () => {
   snapshot.forEach((doc) => {
     records.push({ ...doc.data(), id: doc.id });
   });
-  const data = {};
   records.forEach(async (record) => {
     if (!record?.location?.lat) return;
 
-    record.hash = ngeohash.encode(record.location.lat, record.location.lng);
-    record.lat = record.location.lat;
-    record.lng = record.location.lng;
-    record.version = "v1";
+    // console.log("record", record);
 
-    console.log(record.hash);
+    const geohash = geofire.geohashForLocation([
+      record.location.lat,
+      record.location.lng,
+    ]);
+
+    record.geohash = geohash;
+    record.version = "v2";
+
+    console.log(geohash);
+
 
     try {
       const r = await firebaseAdminDB
@@ -47,7 +52,6 @@ const main = async () => {
       console.log("********", error);
     }
   });
-  console.log(data);
 };
 
 main();

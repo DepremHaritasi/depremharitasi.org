@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0",
+    "geofire-common": "^6.0.0",
     "google-geocoder": "^0.2.1",
     "ngeohash": "^0.6.3",
     "sehir": "^0.2.4",
