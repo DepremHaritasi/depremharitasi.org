@@ -18,6 +18,10 @@
       {
         "source": "/api",
         "function": "api"
+      },
+      {
+        "source": "/ara",
+        "function": "ara"
       }
     ]
   },
