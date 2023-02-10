@@ -196,6 +196,14 @@ exports.api = functions
     lat = Number(lat);
     lng = Number(lng);
 
+    const cacheID = `${lat},${lng}`;
+    // // check cache exists
+    const cacheData = await firebaseAdminDB.collection("cache").doc(cacheID).get();
+    if (cacheData.exists) {
+      const cacheDataValue = cacheData.data();
+      return response.send(JSON.parse(cacheDataValue.cached));
+    }
+
     if (!lat || !lng) {
       return response.send({ success: false });
     }
@@ -249,6 +257,19 @@ exports.api = functions
 
       return matchingDocs;
     });
+
+    // cache
+    await firebaseAdminDB
+      .collection("cache")
+      .doc(cacheID)
+      .set({
+        cached: JSON.stringify({
+          version: "0.1.1",
+          lat,
+          lng,
+          records: matchingDocs,
+        }),
+      });
 
     return response.send({
       version: "0.1.1",

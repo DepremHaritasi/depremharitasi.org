@@ -201,8 +201,6 @@
       setInfoWindow: (data) => {
         if (p.infoWindow) p.infoWindow.setMap(null);
 
-        console.log("data", data);
-
         const excludeList = ["postalCode", "lat", "lng", "city", "country"];
         let fieldList = Object.keys(data.data)
           .filter((i) => data.data[i] && !excludeList.includes(i))
